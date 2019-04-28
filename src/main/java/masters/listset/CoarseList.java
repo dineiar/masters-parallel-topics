@@ -1,32 +1,36 @@
-package listset;
+package masters.listset;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-import listset.def.Node;
-import listset.def.Set;
+import masters.listset.def.Node;
+import masters.listset.def.Set;
 
 public class CoarseList<T> implements Set<T> {
     private Node<T> head;
     private final ReentrantLock lock = new ReentrantLock();
 
-    public CoarseList() { }
+    public CoarseList(T headItem, T tailItem) {
+        head = new Node<>(headItem);
+        Node<T> tail = new Node<>(tailItem);
+        head.next = tail;
+    }
 
     @Override
     public boolean add(T item) {
-        Node pred, curr;
+        Node<T> pred, curr;
         int key = item.hashCode();
         lock.lock();
         try {
             pred = head;
             curr = pred.next;
-            while (curr.key < key) {
+            while (pred.next != null && curr.key < key) {
                 pred = curr;
                 curr = curr.next;
             }
             if (key == curr.key) {
                 return false;
             } else {
-                Node node = new Node(item);
+                Node<T> node = new Node<T>(item);
                 node.next = curr;
                 pred.next = node;
                 return true;
@@ -38,13 +42,13 @@ public class CoarseList<T> implements Set<T> {
 
     @Override
     public boolean contains(T item) {
-        Node pred, curr;
+        Node<T> pred, curr;
         int key = item.hashCode();
         lock.lock();
         try {
             pred = head;
             curr = pred.next;
-            while (curr.key < key) {
+            while (pred.next != null && curr.key < key) {
                 pred = curr;
                 curr = curr.next;
             }
@@ -60,13 +64,13 @@ public class CoarseList<T> implements Set<T> {
 
     @Override
     public boolean remove(T item) {
-        Node pred, curr;
+        Node<T> pred, curr;
         int key = item.hashCode();
         lock.lock();
         try {
             pred = head;
             curr = pred.next;
-            while (curr.key < key) {
+            while (pred.next != null && curr.key < key) {
                 pred = curr;
                 curr = curr.next;
             }

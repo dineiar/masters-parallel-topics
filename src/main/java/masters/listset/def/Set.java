@@ -1,4 +1,4 @@
-package listset.def;
+package masters.listset.def;
 
 public interface Set<T> {
     boolean add(T x);

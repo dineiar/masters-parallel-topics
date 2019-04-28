@@ -1,6 +1,4 @@
-package listset.def;
-
-import listset.def.Set;
+package masters.listset.def;
 
 public class Util {
     public static void main(String[] args) {
