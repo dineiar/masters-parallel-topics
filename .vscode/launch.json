@@ -19,16 +19,9 @@
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-Run<paralleltopics>",
+            "name": "Debug (Launch)-CoarseListExperiment",
             "request": "launch",
-            "mainClass": "masters.experiment.Run",
-            "projectName": "paralleltopics"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-Util<paralleltopics>",
-            "request": "launch",
-            "mainClass": "masters.listset.def.Util",
+            "mainClass": "masters.experiment.CoarseListExperiment",
             "projectName": "paralleltopics"
         },
         {

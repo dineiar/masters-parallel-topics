@@ -1,4 +1,4 @@
-package masters.listset.def;
+package masters.listset.base;
 
 public class Node<T> {
     public Node(T item) {
