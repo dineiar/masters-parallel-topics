@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - HoHContainsLockFreeListExperiment",
+            "request": "launch",
+            "mainClass": "masters.experiment.HoHContainsLockFreeListExperiment",
+            "projectName": "paralleltopics"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"
