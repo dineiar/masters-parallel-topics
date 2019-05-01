@@ -30,7 +30,7 @@ public class CoarseList<T> extends BaseMonitoredList<T> {
         try {
             pred = head;
             curr = pred.next;
-            while (pred.next != null && curr.key < key) {
+            while (curr.key < key) {
                 pred = curr;
                 curr = curr.next;
             }
@@ -56,7 +56,7 @@ public class CoarseList<T> extends BaseMonitoredList<T> {
         try {
             pred = head;
             curr = pred.next;
-            while (pred.next != null && curr.key < key) {
+            while (curr.key < key) {
                 pred = curr;
                 curr = curr.next;
             }
@@ -79,7 +79,7 @@ public class CoarseList<T> extends BaseMonitoredList<T> {
         try {
             pred = head;
             curr = pred.next;
-            while (pred.next != null && curr.key < key) {
+            while (curr.key < key) {
                 pred = curr;
                 curr = curr.next;
             }

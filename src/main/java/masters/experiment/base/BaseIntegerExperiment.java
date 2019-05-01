@@ -8,7 +8,7 @@ import masters.listset.base.BaseMonitoredList;
 public abstract class BaseIntegerExperiment<T extends BaseMonitoredList<Integer>> {
     public final int MONITORING_INTERVAL = 2; //seconds
     public static final int MIN_VALUE = 0; //inclusive
-    public static final int MAX_VALUE = 100; //inclusive
+    public static final int MAX_VALUE = 10000; //inclusive
     protected final int EXPERIMENT_RUNTIME = 120; //seconds
 
     protected ArrayList<IntegerListThread<T>> allThreads = new ArrayList<>();

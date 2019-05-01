@@ -6,16 +6,16 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import masters.experiment.CoarseListExperiment;
+import masters.experiment.HoHListExperiment;
 
 /**
  * Unit test for simple App.
  */
-public class CoarseListExperimentTest
+public class HoHListExperimentTest
 {
 
     public static void main(String[] args) {
-        new CoarseListExperimentTest().mainTest();
+        new HoHListExperimentTest().mainTest();
     }
 
     /**
@@ -24,7 +24,7 @@ public class CoarseListExperimentTest
     @Test
     public void mainTest()
     {
-        CoarseListExperiment experiment = new CoarseListExperiment();
+        HoHListExperiment experiment = new HoHListExperiment();
 
         assertTrue( experiment.getList().add(10) );
         
@@ -37,13 +37,13 @@ public class CoarseListExperimentTest
         assertFalse( experiment.getList().contains(11) );
 
         assertTrue( experiment.getList().add(11) );
-
-        assertEquals( 3, experiment.getList().count() );
         
+        assertEquals( 3, experiment.getList().count() );
+
         assertTrue( experiment.getList().remove(10) );
 
         assertFalse( experiment.getList().add(11) );
-        
+
         assertEquals( 2, experiment.getList().count() );
 
         System.out.println(experiment.getList().printToString());

@@ -15,6 +15,12 @@ public class Monitor<T> extends Thread {
     private int numContainsThreads;
     private int totalThreads;
 
+    private long monitoringCount;
+    private long meanPopulation;
+    private long meanAddOperations;
+    private long meanRemoveOperations;
+    private long meanContainsOperations;
+
     private AtomicInteger numAddOperations = new AtomicInteger(0);
     private AtomicInteger numRemoveOperations = new AtomicInteger(0);
     private AtomicInteger numContainsOperations = new AtomicInteger(0);
@@ -48,13 +54,24 @@ public class Monitor<T> extends Thread {
         System.out.println("Experiment;Threads;Add;Remove;Contains;Population");
         while (this.running) {
             if (this.list != null) {
-                String txt = experimentName + ";" + totalThreads + ";" + numAddOperations + ";" 
-                    + numRemoveOperations + ";" + numContainsOperations + ";" + list.count();
+                int population = list.count();
+                int addOperations = numAddOperations.get();
+                int removeOperations = numRemoveOperations.get();
+                int containsOperations = numContainsOperations.get();
+                String txt = experimentName + ";" + totalThreads + ";" + addOperations + ";" 
+                    + removeOperations + ";" + containsOperations + ";" + population;
                 numAddOperations.set(0);
                 numRemoveOperations.set(0);
                 numContainsOperations.set(0);
+                monitoringCount++;
+                meanPopulation += population;
+                meanAddOperations += addOperations;
+                meanRemoveOperations += removeOperations;
+                meanContainsOperations += containsOperations;
+                
                 System.out.println(txt);
             }
+
             try {
                 Thread.sleep(monitoringInterval * 1000);
             } catch (InterruptedException ex) {
@@ -62,6 +79,13 @@ public class Monitor<T> extends Thread {
                 System.out.println(ex.toString());
             }
         }
+        meanPopulation /= monitoringCount;
+        meanAddOperations /= monitoringCount;
+        meanRemoveOperations /= monitoringCount;
+        meanContainsOperations /= monitoringCount;
+        String txt = experimentName + " (Mean);" + totalThreads + ";" + meanAddOperations + ";" 
+            + meanRemoveOperations + ";" + meanContainsOperations + ";" + meanPopulation;
+        System.out.println(txt);
     }
 
     public void terminate() {
