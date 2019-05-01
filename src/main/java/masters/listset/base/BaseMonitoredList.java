@@ -43,4 +43,8 @@ public abstract class BaseMonitoredList<T> implements IList<T> {
     public String toString() {
         return this.printToString();
     }
+
+    protected boolean validate(NodeWithLockMark<T> pred, NodeWithLockMark<T> curr) {
+        return !pred.mark && !curr.mark && pred.next == curr;
+    }
 }

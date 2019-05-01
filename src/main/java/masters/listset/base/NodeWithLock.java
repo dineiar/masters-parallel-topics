@@ -2,16 +2,13 @@ package masters.listset.base;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-public class NodeHoH<T> {
-    public NodeHoH(T item) {
-        this.item = item;
-        this.key = item.hashCode();
+public class NodeWithLock<T> extends Node<T> {
+    public NodeWithLock(T item) {
+        super(item);
     }
 
     private final ReentrantLock lock = new ReentrantLock();
-    public T item;
-    public int key;
-    public NodeHoH<T> next;
+    public NodeWithLock<T> next;
 
     public void lock() {
         lock.lock();
