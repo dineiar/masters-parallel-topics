@@ -84,6 +84,7 @@ public class HoHContainsLockFreeList<T> extends BaseMonitoredList<T> {
                     curr.lock();
                 }
                 if (key == curr.key) {
+                    curr.mark = true;
                     pred.next = curr.next;
                     return true;
                 } else {
@@ -100,25 +101,10 @@ public class HoHContainsLockFreeList<T> extends BaseMonitoredList<T> {
     @Override
     public int count() {
         int count = 0;
-        NodeWithLockMark<T> pred, curr;
-        pred = head;
-        pred.lock();
-        try {
-            curr = pred.next;
-            curr.lock();
-            try {
-                while (curr.next != null) {
-                    count++;
-                    pred.unlock();
-                    pred = curr;
-                    curr = curr.next;
-                    curr.lock();
-                }
-            } finally {
-                curr.unlock();
-            }
-        } finally {
-            pred.unlock();
+        NodeWithLockMark<T> curr = head;
+        while (curr.next != null) {
+            if (!curr.mark) count++;
+            curr = curr.next;
         }
         return count;
     }
@@ -136,7 +122,7 @@ public class HoHContainsLockFreeList<T> extends BaseMonitoredList<T> {
             curr.lock();
             try {
                 while (curr.next != null) {
-                    if (curr.item != this.tailItem) {
+                    if (!curr.mark && curr.item != this.tailItem) {
                         count++;
                         sb.append(curr.key + ", ");
                     }

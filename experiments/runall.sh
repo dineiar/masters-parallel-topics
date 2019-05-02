@@ -2,7 +2,8 @@
 
 mvn -f ../ package
 
-EXPERIMENTS="CoarseListExperiment HoHListExperiment HoHContainsLockFreeListExperiment"
+# EXPERIMENTS="CoarseListExperiment HoHListExperiment HoHContainsLockFreeListExperiment"
+EXPERIMENTS="HoHContainsLockFreeListExperiment"
 
 for exp in $EXPERIMENTS;
 do
