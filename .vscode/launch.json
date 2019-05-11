@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - RandomOptimisticListExperimentTest",
+            "request": "launch",
+            "mainClass": "masters.RandomOptimisticListExperimentTest",
+            "projectName": "paralleltopics"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - HoHContainsLockFreeListExperiment",
             "request": "launch",
             "mainClass": "masters.experiment.HoHContainsLockFreeListExperiment",
