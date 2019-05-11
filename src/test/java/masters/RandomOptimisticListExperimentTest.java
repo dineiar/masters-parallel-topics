@@ -6,16 +6,16 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import masters.experiment.HoHContainsLockFreeListExperiment;
+import masters.experiment.RandomOptimisticListExperiment;
 
 /**
  * Unit test for simple App.
  */
-public class HoHContainsLockFreeListExperimentTest
+public class RandomOptimisticListExperimentTest
 {
 
     public static void main(String[] args) {
-        new HoHContainsLockFreeListExperimentTest().mainTest();
+        new RandomOptimisticListExperimentTest().mainTest();
     }
 
     /**
@@ -24,7 +24,7 @@ public class HoHContainsLockFreeListExperimentTest
     @Test
     public void mainTest()
     {
-        HoHContainsLockFreeListExperiment experiment = new HoHContainsLockFreeListExperiment();
+        RandomOptimisticListExperiment experiment = new RandomOptimisticListExperiment();
 
         assertTrue( experiment.getList().add(10) );
         
@@ -39,6 +39,8 @@ public class HoHContainsLockFreeListExperimentTest
         assertTrue( experiment.getList().add(11) );
         
         assertEquals( 3, experiment.getList().count() );
+
+        assertFalse( experiment.getList().add(11) );
 
         assertTrue( experiment.getList().remove(10) );
 

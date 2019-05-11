@@ -5,15 +5,15 @@ import masters.experiment.base.Monitor;
 import masters.listset.base.BaseMonitoredList;
 
 /**
- * Hand-on-Hand locking list
+ * Hand-on-Hand locking lazy list
  * @param <T> list items type
  */
-public class HoHContainsLockFreeList<T> extends BaseMonitoredList<T> {
+public class LazyList<T> extends BaseMonitoredList<T> {
     private NodeWithLockMark<T> head;
     private T headItem;
     private T tailItem;
 
-    public HoHContainsLockFreeList(Monitor<T> monitor, T headItem, T tailItem) {
+    public LazyList(Monitor<T> monitor, T headItem, T tailItem) {
         super(monitor);
         this.headItem = headItem;
         this.tailItem = tailItem;
@@ -34,10 +34,17 @@ public class HoHContainsLockFreeList<T> extends BaseMonitoredList<T> {
             curr.lock();
             try {
                 while (curr.key < key) {
-                    pred.unlock();
-                    pred = curr;
-                    curr = curr.next;
-                    curr.lock();
+                    // Delete marked nodes
+                    if (curr.mark) {
+                        pred.next = curr.next;
+                        curr = curr.next;
+                        curr.lock();
+                    } else {
+                        pred.unlock();
+                        pred = curr;
+                        curr = curr.next;
+                        curr.lock();
+                    }
                 }
                 if (key == curr.key) {
                     return false;
@@ -69,32 +76,16 @@ public class HoHContainsLockFreeList<T> extends BaseMonitoredList<T> {
     @Override
     public boolean remove(T item) {
         super.remove(item);
-        NodeWithLockMark<T> pred, curr;
         int key = item.hashCode();
-        pred = head;
-        pred.lock();
-        try {
-            curr = pred.next;
-            curr.lock();
-            try {
-                while (curr.key < key) {
-                    pred.unlock();
-                    pred = curr;
-                    curr = curr.next;
-                    curr.lock();
-                }
-                if (key == curr.key) {
-                    curr.mark = true;
-                    pred.next = curr.next;
-                    return true;
-                } else {
-                    return false;
-                }
-            } finally {
-                curr.unlock();
-            }
-        } finally {
-            pred.unlock();
+        NodeWithLockMark<T> curr = head;
+        while (curr.key < key) {
+            curr = curr.next;
+        }
+        if (key == curr.key) {
+            curr.mark = true;
+            return true;
+        } else {
+            return false;
         }
     }
 

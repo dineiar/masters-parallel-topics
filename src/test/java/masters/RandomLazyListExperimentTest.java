@@ -6,16 +6,16 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import masters.experiment.HoHContainsLockFreeListExperiment;
+import masters.experiment.RandomLazyListExperiment;
 
 /**
  * Unit test for simple App.
  */
-public class HoHContainsLockFreeListExperimentTest
+public class RandomLazyListExperimentTest
 {
 
     public static void main(String[] args) {
-        new HoHContainsLockFreeListExperimentTest().mainTest();
+        new RandomLazyListExperimentTest().mainTest();
     }
 
     /**
@@ -24,7 +24,7 @@ public class HoHContainsLockFreeListExperimentTest
     @Test
     public void mainTest()
     {
-        HoHContainsLockFreeListExperiment experiment = new HoHContainsLockFreeListExperiment();
+        RandomLazyListExperiment experiment = new RandomLazyListExperiment();
 
         assertTrue( experiment.getList().add(10) );
         
