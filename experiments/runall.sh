@@ -3,7 +3,7 @@
 mvn -f ../ package
 
 # EXPERIMENTS="CoarseListExperiment HoHListExperiment HoHContainsLockFreeListExperiment"
-EXPERIMENTS="RandomCoarseListExperiment RandomHoHListExperiment RandomHoHContainsLockFreeListExperiment RandomLazyListExperiment RandomOptimisticListExperiment"
+EXPERIMENTS="RandomCoarseListExperiment RandomHoHListExperiment RandomHoHContainsLockFreeListExperiment RandomLazyListExperiment RandomOptimisticListExperiment RandomLockFreeListExperiment"
 IS_RANDOM=true
 
 for exp in $EXPERIMENTS;

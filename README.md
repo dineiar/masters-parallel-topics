@@ -1,5 +1,8 @@
 # masters-parallel-topics
 
+Implementations of Chapter 9 from:  
+Herlihy, Maurice; Shavit, Nir. **The Art of Multiprocessor Programming**. 2008.
+
 Compile with 
 ```bash
 $ mvn package
